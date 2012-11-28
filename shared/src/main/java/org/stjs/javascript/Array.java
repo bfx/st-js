@@ -17,6 +17,8 @@ package org.stjs.javascript;
 
 import org.stjs.javascript.functions.Callback1;
 
+import java.util.Collection;
+
 /**
  * This interface represents an array from Javascript.The value may be typed. The iteration is done on the indexes to have the javascript
  * equivalent of <br>
@@ -26,7 +28,7 @@ import org.stjs.javascript.functions.Callback1;
  * array.$set(key, value) => array[key]=value
  * @author acraciun
  */
-public interface Array<V> extends Iterable<String> {
+public interface Array<V> extends Collection<V>  {
 	public V $get(int index);
 
 	public V $get(String index);

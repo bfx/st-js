@@ -15,20 +15,12 @@
  */
 package org.stjs.server.json.gson;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-
+import com.google.gson.*;
 import org.stjs.javascript.Array;
 import org.stjs.javascript.JSCollections;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public class JSArrayAdapter implements JsonSerializer<Array<?>>, JsonDeserializer<Array<?>> {
 
@@ -53,8 +45,8 @@ public class JSArrayAdapter implements JsonSerializer<Array<?>>, JsonDeserialize
 			return new JsonNull();
 		}
 		JsonArray js = new JsonArray();
-		for (String i : array) {
-			js.add(ctx.serialize(array.$get(i)));
+		for (Object i : array) {
+			js.add(ctx.serialize(i));
 		}
 		return js;
 	}

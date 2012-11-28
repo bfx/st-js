@@ -15,17 +15,11 @@
  */
 package org.stjs.server;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
-
 import org.stjs.javascript.Array;
 import org.stjs.javascript.SortFunction;
 import org.stjs.javascript.functions.Callback1;
+
+import java.util.*;
 
 /**
  * This class implements the {@link Array} interface to be used on the server side.
@@ -35,9 +29,26 @@ import org.stjs.javascript.functions.Callback1;
 public class ArrayImpl<V> implements Array<V> {
 	private final List<V> array = new ArrayList<V>();
 
-	@Override
-	public Iterator<String> iterator() {
-		return new Iterator<String>() {
+    @Override
+    public int size() {
+        return array.size();  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return array.isEmpty();  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return array.contains(o);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+	public Iterator<V> iterator() {
+        return array.iterator();
+        /*
+		return new Iterator<V>() {
 			private int current = 0;
 
 			@Override
@@ -46,11 +57,13 @@ public class ArrayImpl<V> implements Array<V> {
 			}
 
 			@Override
-			public String next() {
+			public V next() {
 				if (!hasNext()) {
 					throw new NoSuchElementException();
 				}
-				return Integer.toString(current++);
+                V aux = array.get(current);
+                current++;
+				return aux;
 			}
 
 			@Override
@@ -58,9 +71,57 @@ public class ArrayImpl<V> implements Array<V> {
 				throw new UnsupportedOperationException();
 			}
 		};
+		/**/
+
 	}
 
-	@Override
+    @Override
+    public Object[] toArray() {
+        return array.toArray();  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return array.toArray(a);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean add(V v) {
+        return array.add(v);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return array.remove(o);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return array.containsAll(c);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends V> c) {
+        return array.addAll(c);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return array.removeAll(c);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return array.retainAll(c);  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void clear() {
+        array.clear();
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
 	public V $get(int index) {
 		if ((index < 0) || (index >= array.size())) {
 			return null;

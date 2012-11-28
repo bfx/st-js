@@ -1,10 +1,5 @@
 package org.stjs.server;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.io.IOException;
-
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -15,6 +10,11 @@ import org.stjs.javascript.Date;
 import org.stjs.javascript.JSCollections;
 import org.stjs.javascript.Map;
 import org.stjs.server.json.jackson.STJSModule;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class JacksonTest {
 	@Test
@@ -89,7 +89,7 @@ public class JacksonTest {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(STJSModule.getModule());
 		Array<Integer> a = mapper.readValue("[1,2,3]",
-				mapper.getTypeFactory().constructCollectionLikeType(Array.class, Integer.class));
+				mapper.getTypeFactory().constructCollectionType(Array.class, Integer.class));
 		assertNotNull(a);
 		assertEquals(3, a.$length());
 		assertEquals(2, (int) a.$get(1));

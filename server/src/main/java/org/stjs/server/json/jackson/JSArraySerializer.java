@@ -15,13 +15,13 @@
  */
 package org.stjs.server.json.jackson;
 
-import java.io.IOException;
-
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 import org.stjs.javascript.Array;
+
+import java.io.IOException;
 
 public class JSArraySerializer extends JsonSerializer<Array<?>> {
 
@@ -38,8 +38,8 @@ public class JSArraySerializer extends JsonSerializer<Array<?>> {
 			return;
 		}
 		gen.writeStartArray();
-		for (String i : array) {
-			provider.defaultSerializeValue(array.$get(i), gen);
+		for (Object i : array) {
+			provider.defaultSerializeValue(i, gen);
 		}
 		gen.writeEndArray();
 	}
